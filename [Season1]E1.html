@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<title>React-Native 不权威指南</title>
+	</head>
+<body>
+<h2>React-Native 不权威指南</h2>
+
+<h3>第一幕</h3>
+
+<p><em><strong>—说在前面 我们使用目前最流行的react 来编写一个native应用 做一个简单的电影咨询应用</strong></em></p>
+
+<h5> 目前支持最好最稳定的是IOS,所以第一你需要一个OSX系统设备。当然虚拟机也可以.</h5>
+
+<ol>
+	<li><p>环境配置</p>
+
+		<blockquote>
+		<p>首先需要Xcode，Homebrew，node，npm以及watchman(文件监听系统) 还有OSX系统。</p>
+		</blockquote>
+
+		<p><strong>安装Node -v &gt; 4.0以上版本 如果低于此版本请升级 编译可能会导致通过不了.</strong></p></li>
+	<li><p>命令行环境</p>
+
+		<blockquote>
+		<p>npm install -g react-native-cli #安装好terminal工具</p>
+
+		<p>react-native init HelloReact #新建一个项目结构 </p>
+
+		<p>这行代码可以获取所有React Native的源码以及依赖项，同时会创建一个叫做HelloReact/Project.xcodeproj的全新Xcode项目。</p>
+		</blockquote>
+
+		<figure><img src="BE4471D3-0FC1-4581-B6FF-573CA887F5D8.png" alt="如果出现下图 则表示项目成功。第一步已经OK" title="如果出现下图 则表示项目成功。第一步已经OK"/><figcaption>如果出现下图 则表示项目成功。第一步已经OK</figcaption></figure>
+
+		<hr />
+
+		<p><code>但是这里面坑还是多的很。</code></p>
+
+		<p>第一,本次启动的时候官网上没有指出必须服务路径的修改(这回导致服务启动失败) 当然 在项目文件有注释说明不踩这坑基本很难去发现。</p>
+
+		<blockquote>
+		<p>解决办法</p>
+		</blockquote>
+
+		<ul>
+			<li>1.AppDelegate.m 这个文件中的 jsCodeLocation 部分如果不修改localhost为指定本地的IP会无故引起无服务导致的错误。这时候需要将jsCodeLocation = <a href="">NSURL URLWithString:@“http://localhost:8081/index.ios.bundle&quot;</a> localhost 修改为 自己的IP 。</li>
+			<li>2.代码编译错误 编译时可能遇到的错误。TypeError: Cannot read property &#39;root&#39; of null </li>
+		</ul>
+
+		<blockquote>
+		<p><strong>这个错误后来在Git issue发现了相同问题 我的brew没有进行过更新 也没有对用把watchman更新。在启动时值获取不到 应该是版本迭代导致的react现有版本导致更新失败。</strong></p>
+		</blockquote></li>
+	<li><p>代码编写</p>
+
+		<p> <strong>好了 现在终于可以进行一些简单的代码编写</strong></p>
+
+		<blockquote>
+		<p> 当然对于代码编写还是我们熟识的JS.我习惯于使用sublime来进行开发 使用sublime打开项目根目录.找到对应的index.ios.js 或者 index.android.js这个时候我们自己添加一串数据(facebook.github拔的数据例子)</p>
+
+		<p><code>首先 我们将项目根目录的index.ios.js找到, 然后我们添加一行模拟的JSON格式数据 </code></p>
+
+		<pre><code class="js">
+		var  MoviesData = [
+		    {
+		      title:'恶棍天使',
+		      year:'2015',
+		      pic:'http://img3.imgtn.bdimg.com/it/u=1205709192,2237701695&fm=11&gp=0.jpg'
+		    }
+		];
+		function(){}
+		</code></pre>
+		</blockquote></li>
+</ol>
+
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/default.min.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
+
